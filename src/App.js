@@ -1,8 +1,9 @@
 import { Grommet } from 'grommet';
+import { hpe } from 'grommet-theme-hpe';
 
 function App() {
   return (
-		<Grommet full>
+		<Grommet theme={hpe} >
       <header className="App-header">
         <p>
           Edit <code>src/App.js</code> and save to reload.

@@ -7,6 +7,7 @@ import Greeting from './Greeting';
 import ServerUsageChart from './Chart';
 import MyLineChart from './LineCharts';
 import ToggleView from './global-header/components/ToggleView';
+import BoxComponent from './global-header/components/BoxComponent';
 
 const DashboardExample = () => {
   const [user, setUser] = useState(defaultUser);
@@ -46,7 +47,7 @@ const DashboardExample = () => {
             {/* <ServerUsageChart /> */}
             <ToggleView toggle={toggle} togglet={togglet} />
             <MyLineChart toggleChart={toggle} />
-            
+            <BoxComponent/>
           </Box>
           {user && <DashboardFooter />}
         </Box>

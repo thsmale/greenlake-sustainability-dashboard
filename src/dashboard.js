@@ -5,6 +5,7 @@ import { defaultUser, GlobalHeader, UserContext } from './global-header';
 import DashboardFooter from './DashboardFooter'
 import Greeting from './Greeting';
 import ServerUsageChart from './Chart';
+import MyLineChart from './LineCharts';
 
 const DashboardExample = () => {
   const [user, setUser] = useState(defaultUser);
@@ -41,7 +42,9 @@ const DashboardExample = () => {
             ) : (
               <DemoPageContent />
               )}
-              <ServerUsageChart/>
+            <ServerUsageChart />
+            <MyLineChart/>
+            
           </Box>
           {user && <DashboardFooter />}
         </Box>

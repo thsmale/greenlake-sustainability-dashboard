@@ -82,7 +82,8 @@ const ServerUsageChart = () => {
 const [hovered, setHovered] = useState(null);
 const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
 
-const onMouseOver = (event, value) => {
+    const onMouseOver = (event, value) => {
+    console.log("tool tip toggle")
   setHovered(value);
   setTooltipPos({ top: event.clientY, left: event.clientX });
 };
@@ -94,10 +95,25 @@ const onMouseOut = () => {
 
   return (
     <Grommet theme={theme}>
-      <Box fill align="center" pad="medium">
+      {hovered && (
+        <Box
+          pad="small"
+          width="400px"
+          height="200px"
+          background="white"
+          position="absolute"
+          style={{ top: tooltipPos.top, left: tooltipPos.left }}
+          round
+          elevation="small"
+        >
+          <Text>Text gewg</Text>
+        </Box>
+      )}
+      <Box fill align="center" justify="center">
         <DataChart
           data={dataa}
           series={["date", { property: "amount", prefix: "" }]}
+          guide={{ x: { granularity: "fine" }, y: { granularity: "fine" } }}
           chart={[
             {
               property: "amount",
@@ -112,9 +128,8 @@ const onMouseOut = () => {
             {
               property: "amount",
 
-              
               type: "point",
-            point: "circle",
+              point: "circle",
               thickness: "small",
               onMouseOver: (event) => onMouseOver(event /* data value here */),
               onMouseOut: onMouseOut,
@@ -122,18 +137,6 @@ const onMouseOut = () => {
           ]}
           guide={{ x: { granularity: "fine" } }}
         />
-        {hovered && (
-          <Box
-            pad="small"
-            background="light-1"
-            position="absolute"
-            style={{ top: tooltipPos.top, left: tooltipPos.left }}
-            round
-            elevation="small"
-          >
-            <Text>{/* Display data for hovered point here */}</Text>
-          </Box>
-        )}
       </Box>
     </Grommet>
   );

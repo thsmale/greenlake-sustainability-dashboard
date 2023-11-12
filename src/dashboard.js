@@ -4,6 +4,7 @@ import { Box, Button, ResponsiveContext, Text } from 'grommet';
 import { defaultUser, GlobalHeader, UserContext } from './global-header';
 import DashboardFooter from './DashboardFooter'
 import Greeting from './Greeting';
+import ServerUsageChart from './Chart';
 
 const DashboardExample = () => {
   const [user, setUser] = useState(defaultUser);
@@ -39,7 +40,8 @@ const DashboardExample = () => {
               </Box>
             ) : (
               <DemoPageContent />
-            )}
+              )}
+              <ServerUsageChart/>
           </Box>
           {user && <DashboardFooter />}
         </Box>

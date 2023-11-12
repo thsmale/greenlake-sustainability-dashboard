@@ -78,7 +78,7 @@ const SidebarHeader = () => (
         flex={false}
         margin={{ bottom: 'xsmall' }}
       >
-        <Text size="large">A</Text>
+        <Text size="large">SJ</Text>
       </Avatar>
       <TextEmphasis>St. Jude Children’s Research Hospital</TextEmphasis>
       <Text size="small">ID: 0a7141c332ec4c4aae04aa4b8fe59deb</Text>

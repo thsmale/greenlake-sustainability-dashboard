@@ -46,10 +46,12 @@ console.log(randomNumber);
 
 let dataa = [];
 for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
-  let randomNum = generateRandomNumber();
+    let randomNum = generateRandomNumber();
+    let randomEmisson = generateRandomNumber();
   let temp = {
     date: formattedDatesOfCurrentMonth[i],
     value: randomNum,
+    emisson: randomEmisson
   };
   dataa.push(temp);
 }
@@ -86,30 +88,7 @@ const CustomLine = (props) => {
 };
 
 
-// const CustomizedLine = ({ points, dataKey, strokeBefore, strokeAfter }) => {
-//   const today = new Date();
-//   return (
-//     <g>
-//       {points.map((entry, index, arr) => {
-//         if (index === 0) return null;
-//         const prev = arr[index - 1];
-//         const stroke =
-//           new Date(entry.payload.date) < today ? strokeBefore : strokeAfter;
-//         return (
-//           <line
-//             key={`line-${index}`}
-//             x1={prev.x}
-//             y1={prev.y}
-//             x2={entry.x}
-//             y2={entry.y}
-//             stroke={stroke}
-//             strokeWidth={2}
-//           />
-//         );
-//       })}
-//     </g>
-//   );
-// };
+
 
 // Example data
 const data = [
@@ -126,55 +105,62 @@ const secondHalf = [{ ...dataa[halfwayIndex - 1] }, ...dataa.slice(halfwayIndex)
 
 console.log("the first half", firstHalf.length, " the second half", secondHalf.length)
 
-const MyLineChart = () => {
-  return (
-    <LineChart width={1000} height={300} data={dataa}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="date" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      {/* <Line
-        type="monotone"
-        dataKey="value"
-        dot={false}
-        activeDot={{ r: 8 }}
-        isAnimationActive={false}
-        content={<CustomLine stroke1="red" stroke2="green" />}
-      /> */}
-      {/* Line for the first half */}
-      <Line
-        type="monotone"
-        data={dataa.slice(10, halfwayIndex)}
-        dataKey="value"
-        stroke="#333"
-        // other props
-      />
-
-      {/* Line for the second half */}
-      <Line
-        type="monotone"
-        data={dataa.slice(halfwayIndex - 1)}
-        // data={secondHalf}
-        dataKey="value"
-        stroke="red"
-        // other props
-      />
-      {/* <Line
-        type="monotone"
-        dataKey="value"
-        stroke="#8884d8"
-        dot={false}
-        activeDot={{ r: 8 }}
-        isAnimationActive={false}
-        // Using the custom line component
-        content={<CustomLine stroke1="red" stroke2="green" />}
-        // content={
-        //   <CustomizedLine strokeBefore="#8884d8" strokeAfter="#82ca9d" />
-        // }
-      /> */}
-    </LineChart>
-  );
+const MyLineChart = ({toggleChart}) => {
+    return (
+      <>
+        {toggleChart ? (
+          <LineChart width={1000} height={300} data={dataa}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              data={dataa}
+              // data={secondHalf}
+              dataKey="value"
+              strokeWidth={2}
+              stroke="#41CDAC"
+              // other props
+            />
+            <Line
+              type="monotone"
+              data={dataa.slice(0, halfwayIndex)}
+              dataKey="value"
+              stroke="#01A982"
+              strokeWidth={4}
+              // other props
+            />
+          </LineChart>
+        ) : (
+          <LineChart width={1000} height={300} data={dataa}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              data={dataa}
+              // data={secondHalf}
+              dataKey="emisson"
+              strokeWidth={2}
+              stroke="#C5722A"
+              // other props
+            />
+            <Line
+              type="monotone"
+              data={dataa.slice(0, halfwayIndex)}
+              dataKey="emisson"
+              stroke="#FF7701"
+              strokeWidth={4}
+              // other props
+            />
+          </LineChart>
+        )}
+      </>
+    );
 };
 
 export default MyLineChart;

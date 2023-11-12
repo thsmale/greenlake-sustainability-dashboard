@@ -6,11 +6,12 @@ import DashboardFooter from './DashboardFooter'
 import Greeting from './Greeting';
 import ServerUsageChart from './Chart';
 import MyLineChart from './LineCharts';
+import ToggleView from './global-header/components/ToggleView';
 
 const DashboardExample = () => {
   const [user, setUser] = useState(defaultUser);
   const size = useContext(ResponsiveContext);
-
+  const [toggle, togglet] = useState(true);
   const contextValue = useMemo(
     () => ({
       user,
@@ -43,7 +44,8 @@ const DashboardExample = () => {
               <DemoPageContent />
               )}
             {/* <ServerUsageChart /> */}
-            <MyLineChart/>
+            <ToggleView toggle={toggle} togglet={togglet} />
+            <MyLineChart toggleChart={toggle} />
             
           </Box>
           {user && <DashboardFooter />}

@@ -1,0 +1,22 @@
+.ToggleView {
+    display: flex;
+    padding: 10px;
+    width: 256px;
+    
+}
+
+.toggle-view-container {}
+
+.ToggleView div {
+    padding: 1px 8px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.green {
+    background-color: #01A982;
+}
+
+.orange {
+    background-color: #FF7701;
+}

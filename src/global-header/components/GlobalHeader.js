@@ -17,7 +17,7 @@ export const GlobalHeader = () => {
         vertical: 'small',
       }}
     >
-      <AppIdentity title="Service Name" brand="hpe" />
+      <AppIdentity title="Emerald Vue" brand="hpe" />
       {user && <HeaderNav />}
     </Header>
   );

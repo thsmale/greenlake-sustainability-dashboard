@@ -7,8 +7,8 @@ const Greeting = () => {
   const { user } = useContext(UserContext);
   return (
     <PageHeader
-      title={`Hello, ${user.firstName}!`}
-      subtitle="Welcome to the HPE Common Cloud Console."
+      title={`Welcome`}
+      subtitle="This is our demo of Emerald Vue a dashboard"
     />
   );
 };

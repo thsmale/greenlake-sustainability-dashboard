@@ -42,7 +42,7 @@ const DashboardExample = () => {
             ) : (
               <DemoPageContent />
               )}
-            <ServerUsageChart />
+            {/* <ServerUsageChart /> */}
             <MyLineChart/>
             
           </Box>

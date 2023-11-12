@@ -72,8 +72,8 @@ const CustomLine = (props) => {
           <line
             key={`line-${index}`}
             stroke={stroke}
-            strokeWidth={2}
-            fill="none"
+            strokeWidth={5}
+            fill="#555"
             x1={points[index - 1].x}
             y1={points[index - 1].y}
             x2={point.x}
@@ -84,7 +84,6 @@ const CustomLine = (props) => {
     </g>
   );
 };
-
 
 
 // const CustomizedLine = ({ points, dataKey, strokeBefore, strokeAfter }) => {
@@ -119,6 +118,14 @@ const data = [
   // ... more data points ...
 ];
 
+const halfwayIndex = Math.floor(dataa.length / 2);
+
+// Splitting the data into two halves
+const firstHalf = dataa.slice(0, halfwayIndex);
+const secondHalf = [{ ...dataa[halfwayIndex - 1] }, ...dataa.slice(halfwayIndex)];
+
+console.log("the first half", firstHalf.length, " the second half", secondHalf.length)
+
 const MyLineChart = () => {
   return (
     <LineChart width={1000} height={300} data={dataa}>
@@ -127,10 +134,36 @@ const MyLineChart = () => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line
+      {/* <Line
         type="monotone"
         dataKey="value"
-        // stroke="#8884d8"
+        dot={false}
+        activeDot={{ r: 8 }}
+        isAnimationActive={false}
+        content={<CustomLine stroke1="red" stroke2="green" />}
+      /> */}
+      {/* Line for the first half */}
+      <Line
+        type="monotone"
+        data={dataa.slice(10, halfwayIndex)}
+        dataKey="value"
+        stroke="#333"
+        // other props
+      />
+
+      {/* Line for the second half */}
+      <Line
+        type="monotone"
+        data={dataa.slice(halfwayIndex - 1)}
+        // data={secondHalf}
+        dataKey="value"
+        stroke="red"
+        // other props
+      />
+      {/* <Line
+        type="monotone"
+        dataKey="value"
+        stroke="#8884d8"
         dot={false}
         activeDot={{ r: 8 }}
         isAnimationActive={false}
@@ -139,7 +172,7 @@ const MyLineChart = () => {
         // content={
         //   <CustomizedLine strokeBefore="#8884d8" strokeAfter="#82ca9d" />
         // }
-      />
+      /> */}
     </LineChart>
   );
 };

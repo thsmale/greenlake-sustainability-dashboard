@@ -5,7 +5,8 @@ const OmptimizeContainer = ({ modal, modalToggle, func }) => {
       modalToggle(!modal)
   }
     return (
-    <div>
+        <div>
+            <p>Would you like to optimize for compute?</p>
       <Button onClick={func} primary label="Optimize" />
     </div>
   );

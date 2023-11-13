@@ -16,6 +16,7 @@ const DashboardExample = () => {
   const size = useContext(ResponsiveContext);
   const [toggle, togglet] = useState(true);
   const [modal, modalToggle] = useState(false);
+  const [predictive, predictiveToggle] = useState(false);
   const contextValue = useMemo(
     () => ({
       user,
@@ -23,6 +24,10 @@ const DashboardExample = () => {
     }),
     [user],
   );
+  const togglePredictive = () => {
+    console.log("predictive")
+    predictiveToggle(!predictive)
+  }
 
   const toggleModalFunc = () => {
     console.log("calling this func")
@@ -54,7 +59,7 @@ const DashboardExample = () => {
             )}
             {/* <ServerUsageChart /> */}
             <ToggleView toggle={toggle} togglet={togglet} />
-            <MyLineChart toggleChart={toggle} />
+            <MyLineChart predictive={predictive} toggleChart={toggle} />
             <Box direction="row" gap="medium">
               <Box>
                 <BoxComponent />
@@ -68,7 +73,17 @@ const DashboardExample = () => {
           </Box>
           {user && <DashboardFooter />}
         </Box>
-        {modal ? <Modal toggle={toggleModalFunc} /> : <></>}
+        {modal ? (
+          <Modal
+            predictive={predictive}
+            predictiveToggle={predictiveToggle}
+            toggle={toggleModalFunc}
+            togglePredictive={togglePredictive}
+            modalToggle={modalToggle}
+          />
+        ) : (
+          <></>
+        )}
       </Box>
     </UserContext.Provider>
   );

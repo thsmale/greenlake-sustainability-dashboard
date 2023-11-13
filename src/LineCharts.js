@@ -47,11 +47,13 @@ console.log(randomNumber);
 let dataa = [];
 for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
     let randomNum = generateRandomNumber();
-    let randomEmisson = generateRandomNumber();
+  let randomEmisson = generateRandomNumber();
+  let randomPredictive = generateRandomNumber();
   let temp = {
     date: formattedDatesOfCurrentMonth[i],
     value: randomNum,
-    emisson: randomEmisson
+    emisson: randomEmisson,
+    predictive: randomPredictive
   };
   dataa.push(temp);
 }
@@ -105,62 +107,86 @@ const secondHalf = [{ ...dataa[halfwayIndex - 1] }, ...dataa.slice(halfwayIndex)
 
 console.log("the first half", firstHalf.length, " the second half", secondHalf.length)
 
-const MyLineChart = ({toggleChart}) => {
-    return (
-      <>
-        {toggleChart ? (
-          <LineChart width={1000} height={300} data={dataa}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
+const MyLineChart = ({ toggleChart, predictive }) => {
+  return (
+    <>
+      {toggleChart ? (
+        <LineChart width={1000} height={300} data={dataa}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            data={dataa}
+            // data={secondHalf}
+            dataKey="value"
+            strokeWidth={2}
+            stroke="#41CDAC"
+            // other props
+          />
+          <Line
+            type="monotone"
+            data={dataa.slice(0, halfwayIndex)}
+            dataKey="value"
+            stroke="#01A982"
+            strokeWidth={4}
+            // other props
+          />
+          {predictive ? (
             <Line
               type="monotone"
               data={dataa}
-              // data={secondHalf}
-              dataKey="value"
-              strokeWidth={2}
-              stroke="#41CDAC"
-              // other props
-            />
-            <Line
-              type="monotone"
-              data={dataa.slice(0, halfwayIndex)}
-              dataKey="value"
-              stroke="#01A982"
+              dataKey="predictive"
+              stroke="#000"
               strokeWidth={4}
               // other props
             />
-          </LineChart>
-        ) : (
-          <LineChart width={1000} height={300} data={dataa}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
+          ) : (
+            <></>
+          )}
+        </LineChart>
+      ) : (
+        <LineChart width={1000} height={300} data={dataa}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            data={dataa}
+            // data={secondHalf}
+            dataKey="emisson"
+            strokeWidth={2}
+            stroke="#C5722A"
+            // other props
+          />
+          <Line
+            type="monotone"
+            data={dataa.slice(0, halfwayIndex)}
+            dataKey="emisson"
+            stroke="#FF7701"
+            strokeWidth={4}
+            // other props
+          />
+          {predictive ? (
             <Line
               type="monotone"
               data={dataa}
-              // data={secondHalf}
-              dataKey="emisson"
-              strokeWidth={2}
-              stroke="#C5722A"
-              // other props
-            />
-            <Line
-              type="monotone"
-              data={dataa.slice(0, halfwayIndex)}
-              dataKey="emisson"
-              stroke="#FF7701"
+              dataKey="value"
+              stroke="red"
               strokeWidth={4}
               // other props
             />
-          </LineChart>
-        )}
-      </>
-    );
+          ) : (
+            <></>
+          )}
+        </LineChart>
+      )}
+    </>
+  );
 };
 
 export default MyLineChart;

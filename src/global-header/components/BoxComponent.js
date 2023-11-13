@@ -4,11 +4,16 @@ const BoxComponent = () => {
     return (
       <div>
         <Box fill pad="small" height="1000" background="#F5F5F5">
-          <Meter
+         
+                <Meter
+                    
             values={[
-              { round:true,
+              {
+                thickness: "large",
+                round: true,
                 value: 60,
                 label: "sixty",
+                type: "circle",
                 onClick: () => {},
               },
             ]}

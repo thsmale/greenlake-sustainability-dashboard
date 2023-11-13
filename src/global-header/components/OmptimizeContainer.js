@@ -1,12 +1,14 @@
 import React from 'react'
 import { Button } from "grommet";
-const OmptimizeContainer = () =>  {
+const OmptimizeContainer = ({ modal, modalToggle, func }) => {
+    const toggleModal = () => {
+      modalToggle(!modal)
+  }
     return (
-      <div>
-      
-        <Button primary label="Optimize" />
-      </div>
-    );
-}
+    <div>
+      <Button onClick={func} primary label="Optimize" />
+    </div>
+  );
+};
 
 export default OmptimizeContainer

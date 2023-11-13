@@ -6,8 +6,8 @@ export const UserContext = React.createContext({
 });
 
 export const defaultUser = {
-  firstName: 'John',
-  lastName: 'Doe',
-  email: 'john.doe@hpe.com',
-  image: '//s.gravatar.com/avatar/99020cae7ff399a4fbea19c0634f77c3?s=80',
+  firstName: 'Saint',
+  lastName: 'Jude',
+  email: 'saint.jude@mail.com',
+  image: '//ww2.freelogovectors.net/wp-content/uploads/2023/04/st-jude-childrens-research-hospital_logo-freelogovectors.net_.png?lossy=1&w=2560&ssl=1',
 };

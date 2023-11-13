@@ -64,11 +64,11 @@ const DashboardExample = () => {
                 modalToggle={modalToggle}
                 func={toggleModalFunc}
               />
-              {modal ? <Modal /> : <></>}
             </Box>
           </Box>
           {user && <DashboardFooter />}
         </Box>
+        {modal ? <Modal toggle={toggleModalFunc} /> : <></>}
       </Box>
     </UserContext.Provider>
   );

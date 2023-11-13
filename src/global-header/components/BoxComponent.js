@@ -1,10 +1,21 @@
 import React from 'react'
-import { Box, Image, ResponsiveContext } from "grommet";
+import { Box, Image, ResponsiveContext, Meter } from "grommet";
 const BoxComponent = () => {
     return (
       <div>
         <Box fill pad="small" height="1000" background="#F5F5F5">
-          <p>geg</p>
+          <Meter
+            values={[
+              { round:true,
+                value: 60,
+                label: "sixty",
+                onClick: () => {},
+              },
+            ]}
+            aria-label="meter"
+          />
+          <p>Current Usage</p>
+          <p>Predicted Total Usage</p>
         </Box>
       </div>
     );

@@ -1,0 +1,15 @@
+{
+  "short_name": "HPE Greenlake Emerald",
+  "name": "HPE Grennlake Emerald Vue",
+  "icons": [
+    {
+      "src": "hpe-element-color.svg",
+      "type": "image/svg",
+      "sizes": "56x17"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Image, ResponsiveContext, Meter } from "grommet";
+import { Box } from "grommet";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 const BoxComponent = () => {
   const percentage = 66;

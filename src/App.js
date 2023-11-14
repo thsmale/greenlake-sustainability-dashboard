@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grommet } from 'grommet';
 import { hpe } from 'grommet-theme-hpe';
-import Dashboard from './dashboard';
+import Dashboard from './Dashboard';
 
 function App() {
   return (

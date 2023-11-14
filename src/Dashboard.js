@@ -1,29 +1,22 @@
 // DashboardExample.js
-import React, { useContext, useMemo, useState } from 'react';
-import { Box, Button, ResponsiveContext, Text } from 'grommet';
-import { defaultUser, GlobalHeader, UserContext } from './global-header';
+import React, { useContext, useState } from 'react';
+import { Box, Button, Nav, ResponsiveContext, } from 'grommet';
 import DashboardFooter from './DashboardFooter'
 import Greeting from './Greeting';
 import ServerUsageChart from './Chart';
 import MyLineChart from './LineCharts';
-import ToggleView from './global-header/components/ToggleView';
-import BoxComponent from './global-header/components/BoxComponent';
-import OmptimizeContainer from './global-header/components/OmptimizeContainer';
-import Modal from './global-header/components/Modal';
+import ToggleView from './toggle/ToggleView';
+import BoxComponent from './BoxComponent';
+import OptimizeContainer from './OptimizeContainer';
+import Modal from './modal/Modal';
+import GreenlakeHeader from './Header';
 
 const DashboardExample = () => {
-  const [user, setUser] = useState(defaultUser);
   const size = useContext(ResponsiveContext);
   const [toggle, togglet] = useState(true);
   const [modal, modalToggle] = useState(false);
   const [predictive, predictiveToggle] = useState(false);
-  const contextValue = useMemo(
-    () => ({
-      user,
-      setUser,
-    }),
-    [user],
-  );
+
   const togglePredictive = () => {
     console.log("predictive")
     predictiveToggle(!predictive)
@@ -35,9 +28,19 @@ const DashboardExample = () => {
   }
 
   return (
-    <UserContext.Provider value={contextValue}>
       <Box width={{ max: "xxlarge" }} margin="auto" fill>
-        <GlobalHeader />
+        <GreenlakeHeader />
+        <Nav
+          border={{ color: 'border-weak', side: 'bottom' }}
+          direction="row"
+          pad={{
+            horizontal: !['xsmall', 'small'].includes(size) ? 'medium' : 'small',
+            vertical: 'small'
+          }}
+        >
+          <Button label="Emerald" />
+          <Button label="About" />
+        </Nav>
         <Box overflow="auto">
           <Box
             background="background"
@@ -50,13 +53,9 @@ const DashboardExample = () => {
             }}
             flex={false}
           >
-            {user ? (
-              <Box gap="large">
-                <Greeting />
-              </Box>
-            ) : (
-              <DemoPageContent />
-            )}
+            <Box gap="large">
+              <Greeting />
+            </Box>
             {/* <ServerUsageChart /> */}
             <ToggleView toggle={toggle} togglet={togglet} />
             <MyLineChart predictive={predictive} toggleChart={toggle} />
@@ -64,14 +63,14 @@ const DashboardExample = () => {
               <Box>
                 <BoxComponent />
               </Box>
-              <OmptimizeContainer
+              <OptimizeContainer
                 modal={modal}
                 modalToggle={modalToggle}
                 func={toggleModalFunc}
               />
             </Box>
           </Box>
-          {user && <DashboardFooter />}
+          <DashboardFooter />
         </Box>
         {modal ? (
           <Modal
@@ -85,19 +84,6 @@ const DashboardExample = () => {
           <></>
         )}
       </Box>
-    </UserContext.Provider>
-  );
-};
-
-// This is for demo purposes only. Replace in production with app
-// specific content.
-const DemoPageContent = () => {
-  const { setUser } = useContext(UserContext);
-  return (
-    <Box align="center" gap="small">
-      <Text>This button is for demo purposes only.</Text>
-      <Button label="Sign In" primary onClick={() => setUser(defaultUser)} />
-    </Box>
   );
 };
 

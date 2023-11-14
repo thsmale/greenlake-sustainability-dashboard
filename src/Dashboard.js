@@ -10,6 +10,7 @@ import BoxComponent from './BoxComponent';
 import OptimizeContainer from './OptimizeContainer';
 import Modal from './modal/Modal';
 import GreenlakeHeader from './Header';
+import About from './About';
 
 const DashboardExample = () => {
   const size = useContext(ResponsiveContext);
@@ -39,7 +40,7 @@ const DashboardExample = () => {
           }}
         >
           <Button label="Emerald" />
-          <Button label="About" />
+          <About/>
         </Nav>
         <Box overflow="auto">
           <Box

@@ -3,7 +3,7 @@
 This is a dashboard that shows real time CPU usage and carbon footprint.
 It provides suggestions for optimizing cpu and carbon emissions.
 
-![Dashboard figma](./dashboard-figma.png)
+## [🔗 Dashboard](https://emeraldvue-5d3047c5816b.herokuapp.com) 
 
 ## Running locally
 In the project directory, you can run:

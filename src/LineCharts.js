@@ -6,6 +6,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  ResponsiveContainer,
+  // Label,
   Legend,
 } from "recharts";
 
@@ -31,94 +33,90 @@ function getDatesOfCurrentMonthFormatted() {
 const formattedDatesOfCurrentMonth = getDatesOfCurrentMonthFormatted();
 console.log(formattedDatesOfCurrentMonth);
 
+
+const CurrentDate = () => {
+  return new Date().getDate(); // This gets the current date of the month
+};
+const halfwayIndex = CurrentDate();
+console.log("this is the day of the month");
+
 function generateRandomNumber() {
   // Generate a random number between 0 (inclusive) and 1 (exclusive)
   const randomNumber = Math.random();
 
   // Scale up the number to be between 0 and 29, then floor it to get an integer,
   // and finally add 1 to make it between 1 and 30
-  return Math.floor(randomNumber * 100) + 1;
+  return Math.floor(randomNumber * 99) + 1;
 }
 
 // Example usage
 const randomNumber = generateRandomNumber();
 console.log(randomNumber);
 
+function getRandomNumber() {
+    return Math.floor(Math.random() * 20) + 3;
+}
+
 let dataa = [];
 for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
     let randomNum = generateRandomNumber();
   let randomEmisson = generateRandomNumber();
   let randomPredictive = generateRandomNumber();
+  let pre = i + 1 > halfwayIndex ? randomNum - getRandomNumber() : randomNum 
   let temp = {
+    num: i + 1,
     date: formattedDatesOfCurrentMonth[i],
     value: randomNum,
+    compute: randomNum,
     emisson: randomEmisson,
-    predictive: randomPredictive
+    predictive: pre,
   };
   dataa.push(temp);
 }
 
-console.log(dataa)
+console.log("this is data",dataa)
 // Custom Line component
-const CustomLine = (props) => {
-  const { points, dataKey, stroke1, stroke2 } = props;
-  const halfLength = Math.floor(points.length / 2);
 
-  return (
-    <g>
-      {points.map((point, index) => {
-        if (index === 0) return null; // Skip the first point
-
-        // Determine the color based on the index
-        const stroke = index <= halfLength ? stroke1 : stroke2;
-
-        return (
-          <line
-            key={`line-${index}`}
-            stroke={stroke}
-            strokeWidth={5}
-            fill="#555"
-            x1={points[index - 1].x}
-            y1={points[index - 1].y}
-            x2={point.x}
-            y2={point.y}
-          />
-        );
-      })}
-    </g>
-  );
-};
-
-
-
-
-// Example data
-const data = [
-  { date: "2023-01-01", value: 10 },
-  { date: "2023-01-02", value: 20 },
-  // ... more data points ...
-];
-
-const halfwayIndex = Math.floor(dataa.length / 2);
 
 // Splitting the data into two halves
 const firstHalf = dataa.slice(0, halfwayIndex);
-const secondHalf = [{ ...dataa[halfwayIndex - 1] }, ...dataa.slice(halfwayIndex)];
+const secondHalf = [{ ...dataa[halfwayIndex ] }, ...dataa.slice(halfwayIndex)];
 
 console.log("the first half", firstHalf.length, " the second half", secondHalf.length)
+
+
+
 
 const MyLineChart = ({ toggleChart, predictive }) => {
   return (
     <>
+      {/* <ResponsiveContainer width="100%" height="100%"> */}
+      {/* </ResponsiveContainer> */}
+
       {toggleChart ? (
-        <LineChart width={1000} height={300} data={dataa}>
+        // <ResponsiveContainer >
+        <LineChart width={1000} height={400} data={dataa}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis />
+          <XAxis
+            allowDuplicatedCategory={false}
+            // tickCount={30}
+            height={40}
+            dataKey="date"
+            // domain={[0, 29]}
+            tick={{ fontSize: 12 }}
+          />
+          <YAxis
+            width={80}
+            yAxisId="left"
+            tick={{ fontSize: 10 }}
+            tickCount={5}
+          ></YAxis>
+
           <Tooltip />
           <Legend />
           <Line
             type="monotone"
+            yAxisId="left"
             data={dataa}
             // data={secondHalf}
             dataKey="value"
@@ -128,19 +126,22 @@ const MyLineChart = ({ toggleChart, predictive }) => {
           />
           <Line
             type="monotone"
+            yAxisId="left"
             data={dataa.slice(0, halfwayIndex)}
-            dataKey="value"
+            dataKey="compute"
             stroke="#01A982"
             strokeWidth={4}
             // other props
           />
           {predictive ? (
             <Line
+              yAxisId="left"
               type="monotone"
-              data={dataa}
+              data={dataa.slice(halfwayIndex - 1, dataa.length)}
               dataKey="predictive"
               stroke="#000"
-              strokeWidth={4}
+              strokeWidth={2}
+              strokeDasharray="2 2"
               // other props
             />
           ) : (
@@ -148,9 +149,17 @@ const MyLineChart = ({ toggleChart, predictive }) => {
           )}
         </LineChart>
       ) : (
-        <LineChart width={1000} height={300} data={dataa}>
+        // </ResponsiveContainer>
+        <LineChart width={1000} height={400} data={dataa}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
+          <XAxis
+            allowDuplicatedCategory={false}
+            // tickCount={30}
+            height={40}
+            dataKey="date"
+            // domain={[0, 29]}
+            tick={{ fontSize: 12 }}
+          />
           <YAxis />
           <Tooltip />
           <Legend />

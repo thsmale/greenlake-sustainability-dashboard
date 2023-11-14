@@ -8,7 +8,7 @@ const Greeting = () => {
   return (
     <PageHeader
       title={`Welcome`}
-      subtitle="This is our demo of Emerald Vue a dashboard"
+      subtitle="This is our demo of Emerald Vue a dashboard for more info visit the about page"
     />
   );
 };

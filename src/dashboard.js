@@ -8,11 +8,15 @@ import ServerUsageChart from './Chart';
 import MyLineChart from './LineCharts';
 import ToggleView from './global-header/components/ToggleView';
 import BoxComponent from './global-header/components/BoxComponent';
+import OmptimizeContainer from './global-header/components/OmptimizeContainer';
+import Modal from './global-header/components/Modal';
 
 const DashboardExample = () => {
   const [user, setUser] = useState(defaultUser);
   const size = useContext(ResponsiveContext);
   const [toggle, togglet] = useState(true);
+  const [modal, modalToggle] = useState(false);
+  const [predictive, predictiveToggle] = useState(false);
   const contextValue = useMemo(
     () => ({
       user,
@@ -20,20 +24,29 @@ const DashboardExample = () => {
     }),
     [user],
   );
+  const togglePredictive = () => {
+    console.log("predictive")
+    predictiveToggle(!predictive)
+  }
+
+  const toggleModalFunc = () => {
+    console.log("calling this func")
+     modalToggle(!modal);
+  }
 
   return (
     <UserContext.Provider value={contextValue}>
-      <Box width={{ max: 'xxlarge' }} margin="auto" fill>
+      <Box width={{ max: "xxlarge" }} margin="auto" fill>
         <GlobalHeader />
         <Box overflow="auto">
           <Box
             background="background"
             justify="center"
             pad={{
-              horizontal: !['xsmall', 'small'].includes(size)
-                ? 'xlarge'
-                : 'medium',
-              vertical: 'large',
+              horizontal: !["xsmall", "small"].includes(size)
+                ? "xlarge"
+                : "medium",
+              vertical: "large",
             }}
             flex={false}
           >
@@ -43,14 +56,34 @@ const DashboardExample = () => {
               </Box>
             ) : (
               <DemoPageContent />
-              )}
+            )}
             {/* <ServerUsageChart /> */}
             <ToggleView toggle={toggle} togglet={togglet} />
-            <MyLineChart toggleChart={toggle} />
-            <BoxComponent/>
+            <MyLineChart predictive={predictive} toggleChart={toggle} />
+            <Box direction="row" gap="medium">
+              <Box>
+                <BoxComponent />
+              </Box>
+              <OmptimizeContainer
+                modal={modal}
+                modalToggle={modalToggle}
+                func={toggleModalFunc}
+              />
+            </Box>
           </Box>
           {user && <DashboardFooter />}
         </Box>
+        {modal ? (
+          <Modal
+            predictive={predictive}
+            predictiveToggle={predictiveToggle}
+            toggle={toggleModalFunc}
+            togglePredictive={togglePredictive}
+            modalToggle={modalToggle}
+          />
+        ) : (
+          <></>
+        )}
       </Box>
     </UserContext.Provider>
   );

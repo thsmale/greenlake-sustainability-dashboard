@@ -92,14 +92,22 @@ const MyLineChart = ({
             setPredictedTotalEmissons
 }) => {
   let totalVal = 0
+  let ttotalEmissons = 0
   for (let i = 0; i < halfwayIndex; i++){
     console.log(dataa[i].value);
     totalVal += dataa[i].value;
+    ttotalEmissons += dataa[i].emisson
   }
+  setTotalEmissons(ttotalEmissons.toFixed(3));
+
   let predictedTotalVal = 0
+  let predictedTotalEmissonsVal = 0
   for (let i = 0; i < dataa.length; i++){
     predictedTotalVal += dataa[i].value;
+    predictedTotalEmissonsVal += dataa[i].emisson
+    
   }
+  setPredictedTotalEmissons(predictedTotalEmissonsVal.toFixed(3));
   setPredictedTotalSoFar(predictedTotalVal);
   setTotalSoFar(totalVal);
   console.log("total so far",totalVal)

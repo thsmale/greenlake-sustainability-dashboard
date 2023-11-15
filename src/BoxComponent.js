@@ -1,14 +1,18 @@
 import React from 'react'
 import { Card, CardBody, CardHeader } from "grommet";
 import { CircularProgressbarWithChildren, buildStyles } from "react-circular-progressbar";
+
 const BoxComponent = ({toggle,  predictedTotalEmissons, setPredictedTotalEmissons,totalEmissons,
             setTotalEmissons, predictive, totalSoFar, setTotalSoFar, predictedTotalSoFar }) => {
+  let percentageEmisson = (totalEmissons / predictedTotalEmissons) * 100;
+  let percentageCPU = (totalSoFar / predictedTotalSoFar) * 100;
+ 
   return (
     <div>
       <Card>
         { toggle ? <CardHeader>Compute</CardHeader> : <CardHeader>Emissions</CardHeader> }
         <CardBody>
-        <CircularProgressbarWithChildren styles={buildStyles({
+        <CircularProgressbarWithChildren value={toggle ? percentageCPU.toFixed(0) : percentageEmisson.toFixed(0) } styles={buildStyles({
               // Rotation of path and trail, in number of turns (0-1)
               rotation: 0.25,
               // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
@@ -25,7 +29,7 @@ const BoxComponent = ({toggle,  predictedTotalEmissons, setPredictedTotalEmisson
               backgroundColor: "#01A982",
             })}>
             <div style={{ fontSize: 48, marginTop: -5 }}>
-              <strong>66%</strong>
+              <strong>{toggle ? percentageCPU.toFixed(0) : percentageEmisson.toFixed(0)}%</strong>
             </div>
           </CircularProgressbarWithChildren>
           <div>

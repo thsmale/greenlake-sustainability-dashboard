@@ -1,8 +1,6 @@
 import React from 'react'
 import { Button } from "grommet";
 const OptimizeContainer = ({
-  modal,
-  modalToggle,
   func,
   optimized,
   setOptimized,

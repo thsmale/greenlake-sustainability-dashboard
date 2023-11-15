@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, Heading, Layer, Paragraph } from 'grommet';
 import { Close } from 'grommet-icons';
+import EmeraldArchitecture from './architecture.png';
 
 const About = ({ containerRef }) => {
     // containerRef is for demonstration purposes on this site. Most
@@ -20,17 +21,24 @@ const About = ({ containerRef }) => {
                     onClickOutside={() => setShowModal(false)}
                     onEsc={() => setShowModal(false)}
                     modal={false}
+                    full={true}
                 >
                     <Box pad="medium">
                         <Box direction="row" align="start" gap="small">
                             <Box gap="medium">
-                                <Heading level={2} margin="none">
+                                <Heading margin="none">
                                     HPE Emerald
                                 </Heading>
                                 <Paragraph margin="none">
                                     This is a dashboard that shows real time CPU usage and carbon footprint.
                                     It provides suggestions for optimizing cpu and carbon emissions.
                                 </Paragraph>
+                                <img 
+                                    src={EmeraldArchitecture}
+                                    alt="Emerald deployment architecture"
+                                    height="1000" 
+                                    width="1000"
+                                />
                             </Box>
                             <Button
                                 icon={<Close />}

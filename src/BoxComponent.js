@@ -19,7 +19,6 @@ const BoxComponent = ({toggle,  predictedTotalEmissons, setPredictedTotalEmisson
               strokeLinecap: "butt",
               // Text size
               textSize: "16px",
-
               // How long animation takes to go from one percentage to another, in seconds
               pathTransitionDuration: 0.5,
               // Colors

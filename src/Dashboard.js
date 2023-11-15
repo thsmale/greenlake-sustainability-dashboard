@@ -22,7 +22,11 @@ const DashboardExample = () => {
   const [predictedTotalSoFar, setPredictedTotalSoFar] = useState(0)
   const [totalEmissons, setTotalEmissons] = useState(0);
   const [predictedTotalEmissons, setPredictedTotalEmissons] = useState(0)
-  
+  const [transform, setTransform] = useState(false);
+  const toggleTransformFunc = () => {
+    setTransform(!transform);
+    console.log("calling the transform func")
+  }
   const toggleBtn = () => {
     togglet(!toggle);
   };
@@ -166,6 +170,7 @@ for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
             setTotalEmissons={setTotalEmissons}
             predictedTotalEmissons={predictedTotalEmissons}
             setPredictedTotalEmissons={setPredictedTotalEmissons}
+            transform={transform}
           />
           <Box direction="row" gap="medium">
             <Box>
@@ -189,6 +194,7 @@ for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
               toggleSetOptimized={toggleSetOptimized}
               optimized={optimized}
               setOptimized={setOptimized}
+              toggleTransformFunc={toggleTransformFunc}
             />
           </Box>
         </Box>

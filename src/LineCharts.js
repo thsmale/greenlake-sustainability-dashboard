@@ -89,28 +89,28 @@ const MyLineChart = ({
   totalEmissons,
   setTotalEmissons,
   predictedTotalEmissons,
-            setPredictedTotalEmissons
+  setPredictedTotalEmissons,
+  transform
 }) => {
-  let totalVal = 0
-  let ttotalEmissons = 0
-  for (let i = 0; i < halfwayIndex; i++){
+  let totalVal = 0;
+  let ttotalEmissons = 0;
+  for (let i = 0; i < halfwayIndex; i++) {
     console.log(dataa[i].value);
     totalVal += dataa[i].value;
-    ttotalEmissons += dataa[i].emisson
+    ttotalEmissons += dataa[i].emisson;
   }
   setTotalEmissons(ttotalEmissons.toFixed(3));
 
-  let predictedTotalVal = 0
-  let predictedTotalEmissonsVal = 0
-  for (let i = 0; i < dataa.length; i++){
+  let predictedTotalVal = 0;
+  let predictedTotalEmissonsVal = 0;
+  for (let i = 0; i < dataa.length; i++) {
     predictedTotalVal += dataa[i].value;
-    predictedTotalEmissonsVal += dataa[i].emisson
-    
+    predictedTotalEmissonsVal += dataa[i].emisson;
   }
   setPredictedTotalEmissons(predictedTotalEmissonsVal.toFixed(3));
   setPredictedTotalSoFar(predictedTotalVal);
   setTotalSoFar(totalVal);
-  console.log("total so far",totalVal)
+  console.log("total so far", totalVal);
   return (
     <>
       {toggleChart ? (
@@ -143,31 +143,53 @@ const MyLineChart = ({
             stroke="#41CDAC"
             // other props
           />
-          <Line
-            type="monotone"
-            yAxisId="left"
-            data={dataa.slice(0, halfwayIndex)}
-            dataKey="compute"
-            stroke="#01A982"
-            strokeWidth={4}
-            // other props
-          />
-          {predictive ? (
-            <Line
-              yAxisId="left"
-              type="monotone"
-              data={dataa.slice(halfwayIndex - 1, dataa.length)}
-              dataKey="predictive"
-              stroke="#000"
-              strokeWidth={2}
-              strokeDasharray="2 2"
-              // other props
-            />
+          {!transform ? (
+            <>
+              <Line
+                type="monotone"
+                yAxisId="left"
+                data={dataa.slice(0, halfwayIndex)}
+                dataKey="compute"
+                stroke="#01A982"
+                strokeWidth={4}
+                // other props
+              />
+              {predictive ? (
+                <Line
+                  yAxisId="left"
+                  type="monotone"
+                  data={dataa.slice(halfwayIndex - 1, dataa.length)}
+                  dataKey="predictive"
+                  stroke="#000"
+                  strokeWidth={2}
+                  strokeDasharray="2 2"
+                  // other props
+                />
+              ) : (
+                <></>
+              )}
+            </>
           ) : (
-            <></>
-          )}
+            <>
+              <Line
+                yAxisId="left"
+                type="monotone"
+                data={dataa.slice(0, dataa.length)}
+                dataKey="predictive"
+                stroke="#01A982"
+                strokeWidth={2}
+               
+              />
+            </>
+          )
+          }
         </LineChart>
+
+
       ) : (
+          
+          
+          
         // </ResponsiveContainer>
         <LineChart width={1000} height={400} data={dataa}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -211,7 +233,9 @@ const MyLineChart = ({
           ) : (
             <></>
           )}
-        </LineChart>
+          </LineChart>
+          
+          
       )}
     </>
   );

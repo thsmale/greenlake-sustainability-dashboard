@@ -6,7 +6,8 @@ const OptimizeContainer = ({
   func,
   optimized,
   setOptimized,
-  toggleSetOptimized
+  toggleSetOptimized,
+  toggleTransformFunc
 }) => {
   return (
     <div>
@@ -14,7 +15,7 @@ const OptimizeContainer = ({
         <div>
           <p>Confirm that you would like to optimize for compute.</p>
           <div>
-            <Button primary label="Confirm" />
+            <Button onClick={toggleTransformFunc} primary label="Confirm" />
             <Button onClick={toggleSetOptimized} label="Cancel" />
           </div>
         </div>

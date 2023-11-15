@@ -79,22 +79,28 @@ for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
 console.log("this is data",dataa)
 // Custom Line component
 
-
-// Splitting the data into two halves
-const firstHalf = dataa.slice(0, halfwayIndex);
-const secondHalf = [{ ...dataa[halfwayIndex ] }, ...dataa.slice(halfwayIndex)];
-
-console.log("the first half", firstHalf.length, " the second half", secondHalf.length)
-
-
-
-
-const MyLineChart = ({ toggleChart, predictive }) => {
+const MyLineChart = ({
+  toggleChart,
+  predictive,
+  totalSoFar,
+  setTotalSoFar,
+  predictedTotalSoFar,
+  setPredictedTotalSoFar
+}) => {
+  let totalVal = 0
+  for (let i = 0; i < halfwayIndex; i++){
+    console.log(dataa[i].value);
+    totalVal += dataa[i].value;
+  }
+  let predictedTotalVal = 0
+  for (let i = 0; i < dataa.length; i++){
+    predictedTotalVal += dataa[i].value;
+  }
+  setPredictedTotalSoFar(predictedTotalVal);
+  setTotalSoFar(totalVal);
+  console.log("total so far",totalVal)
   return (
     <>
-      {/* <ResponsiveContainer width="100%" height="100%"> */}
-      {/* </ResponsiveContainer> */}
-
       {toggleChart ? (
         // <ResponsiveContainer >
         <LineChart width={1000} height={400} data={dataa}>
@@ -120,7 +126,6 @@ const MyLineChart = ({ toggleChart, predictive }) => {
             type="monotone"
             yAxisId="left"
             data={dataa}
-            // data={secondHalf}
             dataKey="value"
             strokeWidth={2}
             stroke="#41CDAC"
@@ -168,7 +173,6 @@ const MyLineChart = ({ toggleChart, predictive }) => {
           <Line
             type="monotone"
             data={dataa}
-            // data={secondHalf}
             dataKey="emisson"
             strokeWidth={2}
             stroke="#C5722A"

@@ -190,7 +190,11 @@ for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
             <OptimizeContainer
               modal={modal}
               modalToggle={modalToggle}
-              func={toggleModalFunc}
+              func={() => {
+                togglePredictive();
+                modalToggle();
+                toggleSetOptimized()
+              }}
               toggleSetOptimized={toggleSetOptimized}
               optimized={optimized}
               setOptimized={setOptimized}

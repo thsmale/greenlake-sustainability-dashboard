@@ -113,6 +113,7 @@ const MyLineChart = ({
   console.log("total so far", totalVal);
   return (
     <>
+      {transform ? <p>Yup</p> : <p>no way</p>}
       {toggleChart ? (
         // <ResponsiveContainer >
         <LineChart width={1000} height={400} data={dataa}>
@@ -134,62 +135,58 @@ const MyLineChart = ({
 
           <Tooltip />
           <Legend />
+          {!transform ? (
+            <Line
+              type="monotone"
+              yAxisId="left"
+              data={dataa}
+              dataKey="value"
+              strokeWidth={2}
+              stroke="#41CDAC"
+              // other props
+            />
+          ) : (
+            <></>
+          )}
+
           <Line
             type="monotone"
             yAxisId="left"
-            data={dataa}
-            dataKey="value"
-            strokeWidth={2}
-            stroke="#41CDAC"
+            data={dataa.slice(0, halfwayIndex)}
+            dataKey="compute"
+            stroke="#01A982"
+            strokeWidth={4}
             // other props
           />
-          {!transform ? (
-            <>
-              <Line
-                type="monotone"
-                yAxisId="left"
-                data={dataa.slice(0, halfwayIndex)}
-                dataKey="compute"
-                stroke="#01A982"
-                strokeWidth={4}
-                // other props
-              />
-              {predictive ? (
-                <Line
-                  yAxisId="left"
-                  type="monotone"
-                  data={dataa.slice(halfwayIndex - 1, dataa.length)}
-                  dataKey="predictive"
-                  stroke="#000"
-                  strokeWidth={2}
-                  strokeDasharray="2 2"
-                  // other props
-                />
-              ) : (
-                <></>
-              )}
-            </>
+          {!transform && predictive ? (
+            <Line
+              yAxisId="left"
+              type="monotone"
+              data={dataa.slice(halfwayIndex - 1, dataa.length)}
+              dataKey="predictive"
+              stroke="#000"
+              strokeWidth={2}
+              strokeDasharray="2 2"
+              // other props
+            />
           ) : (
-            <>
-              <Line
-                yAxisId="left"
-                type="monotone"
-                data={dataa.slice(0, dataa.length)}
-                dataKey="predictive"
-                stroke="#01A982"
-                strokeWidth={2}
-               
-              />
-            </>
-          )
-          }
+            <></>
+          )}
+          {transform ? (
+            <Line
+              yAxisId="left"
+              type="monotone"
+              data={dataa.slice(halfwayIndex - 1, dataa.length)}
+              dataKey="predictive"
+              strokeWidth={2}
+              stroke="#41CDAC"
+              // other props
+            />
+          ) : (
+            <></>
+          )}
         </LineChart>
-
-
       ) : (
-          
-          
-          
         // </ResponsiveContainer>
         <LineChart width={1000} height={400} data={dataa}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -204,14 +201,19 @@ const MyLineChart = ({
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line
-            type="monotone"
-            data={dataa}
-            dataKey="emisson"
-            strokeWidth={2}
-            stroke="#C5722A"
-            // other props
-          />
+          {!transform ? (
+            <Line
+              type="monotone"
+              data={dataa}
+              dataKey="emisson"
+              strokeWidth={2}
+              stroke="#C5722A"
+              // other props
+            />
+          ) : (
+            <></>
+          )}
+
           <Line
             type="monotone"
             data={dataa.slice(0, halfwayIndex)}
@@ -220,7 +222,7 @@ const MyLineChart = ({
             strokeWidth={4}
             // other props
           />
-          {predictive ? (
+          {!transform && predictive ? (
             <Line
               type="monotone"
               strokeDasharray="2 2"
@@ -233,9 +235,19 @@ const MyLineChart = ({
           ) : (
             <></>
           )}
-          </LineChart>
-          
-          
+          {transform ? (
+            <Line
+              type="monotone"
+              data={dataa.slice(halfwayIndex - 1, dataa.length)}
+              dataKey="optimizedEmissons"
+              stroke="#C5722A"
+              strokeWidth={2}
+              // other props
+            />
+          ) : (
+            <></>
+          )}
+        </LineChart>
       )}
     </>
   );

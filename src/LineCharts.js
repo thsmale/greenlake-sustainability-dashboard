@@ -113,7 +113,6 @@ const MyLineChart = ({
   console.log("total so far", totalVal);
   return (
     <>
-      {transform ? <p>Yup</p> : <p>no way</p>}
       {toggleChart ? (
         // <ResponsiveContainer >
         <LineChart width={1000} height={400} data={dataa}>

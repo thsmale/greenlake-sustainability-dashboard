@@ -6,25 +6,38 @@ const OptimizeContainer = ({
   optimized,
   setOptimized,
   toggleSetOptimized,
-  toggleTransformFunc
+  toggleTransformFunc,
+  transform
 }) => {
   return (
     <div>
       <Card>
         <CardHeader>Optimize</CardHeader>
         <CardBody>
-          {optimized ? (
-            <div>
-              <p>Confirm that you would like to optimize for compute.</p>
-              <div>
-                <Button onClick={toggleTransformFunc} primary label="Confirm" />
-                <Button onClick={toggleSetOptimized} label="Cancel" />
-              </div>
-            </div>
+          {transform ? (
+            <>
+            <p>Compute Optimized</p>
+            </>
           ) : (
             <>
-              <p>Would you like to optimize for compute?</p>
-              <Button onClick={func} primary label="Optimize" />
+              {optimized ? (
+                <div>
+                  <p>Confirm that you would like to optimize for compute.</p>
+                  <div>
+                    <Button
+                      onClick={toggleTransformFunc}
+                      primary
+                      label="Confirm"
+                    />
+                    <Button onClick={toggleSetOptimized} label="Cancel" />
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <p>Would you like to optimize for compute?</p>
+                  <Button onClick={func} primary label="Optimize" />
+                </>
+              )}
             </>
           )}
         </CardBody>

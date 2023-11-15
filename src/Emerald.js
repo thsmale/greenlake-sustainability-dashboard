@@ -143,7 +143,8 @@ for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
               toggleSetOptimized={toggleSetOptimized}
               optimized={optimized}
               setOptimized={setOptimized}
-              toggleTransformFunc={toggleTransformFunc}
+            toggleTransformFunc={toggleTransformFunc}
+            transform={transform}
             />
           </Box>
         </Box>

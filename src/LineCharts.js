@@ -63,12 +63,14 @@ for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
   let randomEmisson = generateRandomNumber();
   let randomPredictive = generateRandomNumber();
   let pre = i + 1 > halfwayIndex ? randomNum - getRandomNumber() : randomNum 
+  let optimizedEmissonVal = i + 1 > halfwayIndex ? randomEmisson - getRandomNumber() : randomEmisson;
   let temp = {
     num: i + 1,
     date: formattedDatesOfCurrentMonth[i],
     value: randomNum,
     compute: randomNum,
     emisson: randomEmisson,
+    optimizedEmissons: optimizedEmissonVal,
     predictive: pre,
   };
   dataa.push(temp);
@@ -183,9 +185,10 @@ const MyLineChart = ({ toggleChart, predictive }) => {
           {predictive ? (
             <Line
               type="monotone"
-              data={dataa}
-              dataKey="value"
-              stroke="red"
+              strokeDasharray="2 2"
+              data={dataa.slice(halfwayIndex - 1, dataa.length)}
+              dataKey="optimizedEmissons"
+              stroke="#000"
               strokeWidth={4}
               // other props
             />

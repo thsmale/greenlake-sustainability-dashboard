@@ -1,7 +1,8 @@
 import React from 'react'
 import { Box } from "grommet";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-const BoxComponent = ({ totalSoFar, setTotalSoFar, predictedTotalSoFar }) => {
+const BoxComponent = ({toggle,  predictedTotalEmissons, setPredictedTotalEmissons,totalEmissons,
+            setTotalEmissons, predictive, totalSoFar, setTotalSoFar, predictedTotalSoFar }) => {
   const percentage = 66;
   return (
     <div>
@@ -20,14 +21,26 @@ const BoxComponent = ({ totalSoFar, setTotalSoFar, predictedTotalSoFar }) => {
             // How long animation takes to go from one percentage to another, in seconds
             pathTransitionDuration: 0.5,
             // Colors
-            pathColor: `#01A982`,
+            pathColor: `${ toggle ? "#01A982" : "#FF7701"}`,
             textColor: "#000",
             trailColor: "#d6d6d6",
             backgroundColor: "#01A982",
           })}
         />
-        <p>Current Usage this month: {totalSoFar}</p>
-        <p>Predicted Total Usage: {predictedTotalSoFar}</p>
+        <div>
+          {toggle ? (
+            <p>Current Usage this month: {totalSoFar} CPU</p>
+          ) : (
+            <p>Current Usage this month: {totalEmissons} MTCO2e</p>
+          )}
+        </div>
+        {toggle ? (
+          <p>Predicted Current Usage this month: {predictedTotalSoFar} CPU</p>
+        ) : (
+          <p>
+            Predicted Current Usage this month: {predictedTotalEmissons} MTCO2e
+          </p>
+        )}
       </Box>
     </div>
   );

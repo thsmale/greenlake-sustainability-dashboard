@@ -69,8 +69,8 @@ for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
     date: formattedDatesOfCurrentMonth[i],
     value: randomNum,
     compute: randomNum,
-    emisson: randomEmisson,
-    optimizedEmissons: optimizedEmissonVal,
+    emisson: randomEmisson * .001,
+    optimizedEmissons: optimizedEmissonVal * .001,
     predictive: pre,
   };
   dataa.push(temp);
@@ -85,7 +85,11 @@ const MyLineChart = ({
   totalSoFar,
   setTotalSoFar,
   predictedTotalSoFar,
-  setPredictedTotalSoFar
+  setPredictedTotalSoFar,
+  totalEmissons,
+  setTotalEmissons,
+  predictedTotalEmissons,
+            setPredictedTotalEmissons
 }) => {
   let totalVal = 0
   for (let i = 0; i < halfwayIndex; i++){

@@ -1,10 +1,8 @@
 import React from 'react'
 import "./ToggleView.css"
-const ToggleView = ({ toggle,togglet}) => {
+const ToggleView = ({ toggleBtn, toggle,togglet}) => {
 
-    const toggleBtn = () => {
-        togglet(!toggle);
-    }
+   
     return (
       <div>
         <div className="toggle-view-container">

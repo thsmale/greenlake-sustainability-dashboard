@@ -20,7 +20,14 @@ const DashboardExample = () => {
   const [optimized, setOptimized] = useState(false);
   const [totalSoFar,setTotalSoFar] = useState(0);
   const [predictedTotalSoFar, setPredictedTotalSoFar] = useState(0)
-
+  const [totalEmissons, setTotalEmissons] = useState(0);
+  const [predictedTotalEmissons, setPredictedTotalEmissons] = useState(0)
+  
+  const toggleBtn = () => {
+    togglet(!toggle);
+  };
+  
+  
   const togglePredictive = () => {
     console.log("predictive")
     predictiveToggle(!predictive)
@@ -146,22 +153,33 @@ for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
             <Greeting />
           </Box>
           {/* <ServerUsageChart /> */}
-          <ToggleView toggle={toggle} togglet={togglet} />
+          <ToggleView toggleBtn={toggleBtn} toggle={toggle} togglet={togglet} />
           <MyLineChart
+            toggle={toggle}
             totalSoFar={totalSoFar}
             setTotalSoFar={setTotalSoFar}
             predictive={predictive}
             toggleChart={toggle}
             predictedTotalSoFar={predictedTotalSoFar}
             setPredictedTotalSoFar={setPredictedTotalSoFar}
+            totalEmissons={totalEmissons}
+            setTotalEmissons={setTotalEmissons}
+            predictedTotalEmissons={predictedTotalEmissons}
+            setPredictedTotalEmissons={setPredictedTotalEmissons}
           />
           <Box direction="row" gap="medium">
             <Box>
               <BoxComponent
+                toggle={toggle}
                 totalSoFar={totalSoFar}
                 setTotalSoFar={setTotalSoFar}
                 predictedTotalSoFar={predictedTotalSoFar}
                 setPredictedTotalSoFar={setPredictedTotalSoFar}
+                predictive={predictive}
+                totalEmissons={totalEmissons}
+                setTotalEmissons={setTotalEmissons}
+                predictedTotalEmissons={predictedTotalEmissons}
+                setPredictedTotalEmissons={setPredictedTotalEmissons}
               />
             </Box>
             <OptimizeContainer

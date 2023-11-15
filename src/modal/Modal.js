@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Modal.css"
 import { Card, CardHeader, Box, CardBody, CardFooter, Button, Spinner } from "grommet";
-const Modal = ({ toggle, togglePredictive, modalToggle }) => {
+const Modal = ({ toggleSetOptimized, toggle, togglePredictive, modalToggle }) => {
   const [loader, setLoader] = useState(false);
 
   const setLoaderFunc = () => {
@@ -10,11 +10,10 @@ const Modal = ({ toggle, togglePredictive, modalToggle }) => {
 
     // console.log("this is the loader after", loader);
     console.log("this is the loader after", loader);
-    setTimeout(() => {
-
-    }, 2000);
+    setTimeout(() => {}, 2000);
     togglePredictive();
     modalToggle();
+    toggleSetOptimized()
   };
 
   return (

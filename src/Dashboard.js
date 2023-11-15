@@ -17,7 +17,7 @@ const DashboardExample = () => {
   const [toggle, togglet] = useState(true);
   const [modal, modalToggle] = useState(false);
   const [predictive, predictiveToggle] = useState(false);
-
+  const [optimized, setOptimized] = useState(false);
   const togglePredictive = () => {
     console.log("predictive")
     predictiveToggle(!predictive)
@@ -25,66 +25,78 @@ const DashboardExample = () => {
 
   const toggleModalFunc = () => {
     console.log("calling this func")
-     modalToggle(!modal);
+    modalToggle(!modal);
+   
+  }
+
+  const toggleSetOptimized = () => {
+    setOptimized(!optimized)
+    if (predictive) {
+      togglePredictive()
+    }
   }
 
   return (
-      <Box width={{ max: "xxlarge" }} margin="auto" fill>
-        <GreenlakeHeader />
-        <Nav
-          border={{ color: 'border-weak', side: 'bottom' }}
-          direction="row"
+    <Box width={{ max: "xxlarge" }} margin="auto" fill>
+      <GreenlakeHeader />
+      <Nav
+        border={{ color: "border-weak", side: "bottom" }}
+        direction="row"
+        pad={{
+          horizontal: !["xsmall", "small"].includes(size) ? "medium" : "small",
+          vertical: "small",
+        }}
+      >
+        <Button label="Emerald" />
+        <About />
+      </Nav>
+      <Box overflow="auto">
+        <Box
+          background="background"
+          justify="center"
           pad={{
-            horizontal: !['xsmall', 'small'].includes(size) ? 'medium' : 'small',
-            vertical: 'small'
+            horizontal: !["xsmall", "small"].includes(size)
+              ? "xlarge"
+              : "medium",
+            vertical: "large",
           }}
+          flex={false}
         >
-          <Button label="Emerald" />
-          <About/>
-        </Nav>
-        <Box overflow="auto">
-          <Box
-            background="background"
-            justify="center"
-            pad={{
-              horizontal: !["xsmall", "small"].includes(size)
-                ? "xlarge"
-                : "medium",
-              vertical: "large",
-            }}
-            flex={false}
-          >
-            <Box gap="large">
-              <Greeting />
-            </Box>
-            {/* <ServerUsageChart /> */}
-            <ToggleView toggle={toggle} togglet={togglet} />
-            <MyLineChart predictive={predictive} toggleChart={toggle} />
-            <Box direction="row" gap="medium">
-              <Box>
-                <BoxComponent />
-              </Box>
-              <OptimizeContainer
-                modal={modal}
-                modalToggle={modalToggle}
-                func={toggleModalFunc}
-              />
-            </Box>
+          <Box gap="large">
+            <Greeting />
           </Box>
-          <DashboardFooter />
+          {/* <ServerUsageChart /> */}
+          <ToggleView toggle={toggle} togglet={togglet} />
+          <MyLineChart predictive={predictive} toggleChart={toggle} />
+          <Box direction="row" gap="medium">
+            <Box>
+              <BoxComponent />
+            </Box>
+            <OptimizeContainer
+              modal={modal}
+              modalToggle={modalToggle}
+              func={toggleModalFunc}
+              toggleSetOptimized={toggleSetOptimized}
+              optimized={optimized}
+              setOptimized={setOptimized}
+            />
+          </Box>
         </Box>
-        {modal ? (
-          <Modal
-            predictive={predictive}
-            predictiveToggle={predictiveToggle}
-            toggle={toggleModalFunc}
-            togglePredictive={togglePredictive}
-            modalToggle={modalToggle}
-          />
-        ) : (
-          <></>
-        )}
+        <DashboardFooter />
       </Box>
+      {modal ? (
+        <Modal
+          predictive={predictive}
+          predictiveToggle={predictiveToggle}
+          toggle={toggleModalFunc}
+          togglePredictive={togglePredictive}
+          modalToggle={modalToggle}
+          toggleSetOptimized={toggleSetOptimized}
+        />
+      ) : (
+        <></>
+      )}
+    </Box>
   );
 };
 

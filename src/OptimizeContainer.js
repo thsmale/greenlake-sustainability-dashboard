@@ -1,8 +1,7 @@
 import React from 'react'
-import { Button } from "grommet";
+import { Card, CardBody, CardHeader, Button } from "grommet";
+
 const OptimizeContainer = ({
-  modal,
-  modalToggle,
   func,
   optimized,
   setOptimized,
@@ -11,20 +10,25 @@ const OptimizeContainer = ({
 }) => {
   return (
     <div>
-      {optimized ? (
-        <div>
-          <p>Confirm that you would like to optimize for compute.</p>
-          <div>
-            <Button onClick={toggleTransformFunc} primary label="Confirm" />
-            <Button onClick={toggleSetOptimized} label="Cancel" />
-          </div>
-        </div>
-      ) : (
-        <>
-          <p>Would you like to optimize for compute?</p>
-          <Button onClick={func} primary label="Optimize" />
-        </>
-      )}
+      <Card>
+        <CardHeader>Optimize</CardHeader>
+        <CardBody>
+          {optimized ? (
+            <div>
+              <p>Confirm that you would like to optimize for compute.</p>
+              <div>
+                <Button onClick={toggleTransformFunc} primary label="Confirm" />
+                <Button onClick={toggleSetOptimized} label="Cancel" />
+              </div>
+            </div>
+          ) : (
+            <>
+              <p>Would you like to optimize for compute?</p>
+              <Button onClick={func} primary label="Optimize" />
+            </>
+          )}
+        </CardBody>
+      </Card>
     </div>
   );
 };

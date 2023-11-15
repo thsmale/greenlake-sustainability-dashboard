@@ -8,14 +8,12 @@ import MyLineChart from './LineCharts';
 import ToggleView from './toggle/ToggleView';
 import BoxComponent from './BoxComponent';
 import OptimizeContainer from './OptimizeContainer';
-import Modal from './modal/Modal';
 import GreenlakeHeader from './Header';
 import About from './About';
 
 const DashboardExample = () => {
   const size = useContext(ResponsiveContext);
   const [toggle, togglet] = useState(true);
-  const [modal, modalToggle] = useState(false);
   const [predictive, predictiveToggle] = useState(false);
   const [optimized, setOptimized] = useState(false);
   const [totalSoFar,setTotalSoFar] = useState(0);
@@ -35,12 +33,6 @@ const DashboardExample = () => {
   const togglePredictive = () => {
     console.log("predictive")
     predictiveToggle(!predictive)
-  }
-
-  const toggleModalFunc = () => {
-    console.log("calling this func")
-    modalToggle(!modal);
-   
   }
 
   const toggleSetOptimized = () => {
@@ -188,9 +180,10 @@ for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
               />
             </Box>
             <OptimizeContainer
-              modal={modal}
-              modalToggle={modalToggle}
-              func={toggleModalFunc}
+              func={() => {
+                togglePredictive();
+                toggleSetOptimized()
+              }}
               toggleSetOptimized={toggleSetOptimized}
               optimized={optimized}
               setOptimized={setOptimized}
@@ -200,18 +193,6 @@ for (let i = 0; i < formattedDatesOfCurrentMonth.length; i++) {
         </Box>
         <DashboardFooter />
       </Box>
-      {modal ? (
-        <Modal
-          predictive={predictive}
-          predictiveToggle={predictiveToggle}
-          toggle={toggleModalFunc}
-          togglePredictive={togglePredictive}
-          modalToggle={modalToggle}
-          toggleSetOptimized={toggleSetOptimized}
-        />
-      ) : (
-        <></>
-      )}
     </Box>
   );
 };
